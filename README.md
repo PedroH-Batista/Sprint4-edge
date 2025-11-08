@@ -43,7 +43,7 @@ Esta seção comprova que a comunicação está ativa e que os dados estão send
 | **Device Provisioning** | Associa a entidade `Atleta:001` ao sensor e Service `cp5sprint`. | `201 Created` |
 | **Subscription (Histórico)** | Criação da *Subscription* que envia dados de `Atleta:001` para o **STH-Comet**. | `201 Created` |
 | **Envio de Dados Reais** | O Wokwi envia continuamente o *payload* (ex: `fc|130|vm|35.2`) para a porta 4041. | `200 OK` (Estável) |
-| **** | *O Console do Wokwi comprova o envio contínuo para o IP do Broker.* | |
+| **** | *O Console do Wokwi comprova o envio contínuo para o IP do Broker.* |  <img src="img/image1.png" alt=""/>|
 
 ### 2 Consulta e Validação do Histórico Completo (PoC)
 
