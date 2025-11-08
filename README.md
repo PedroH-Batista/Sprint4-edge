@@ -15,11 +15,13 @@ O foco principal é garantir a **persistência e consulta do histórico completo
 
 
 **Link para o Código Fonte Completo:** [https://github.com/PedroH-Batista/Sprint4-edge.git]
+** Link Wokwi:** [https://wokwi.com/projects/442120288196591617]
+
 
 ---
 ##  Setup da Infraestrutura FIWARE (Ambiente Limpo)
 
-A infraestrutura foi limpa (apagando dados e *Service Paths* antigos) e reconstruída com o *Service Tenant* **`cp5sprint`** para garantir a consistência.
+A infraestrutura foi baseada no seguinte esquema.
 
 | Componente | Função | Configuração de Acesso | Porta |
 | :--- | :--- | :--- | :--- |
