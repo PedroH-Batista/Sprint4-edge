@@ -1,0 +1,89 @@
+version: '3.5'
+
+services:
+
+  # 1. ORION CONTEXT BROKER (Coração do FIWARE)
+  orion:
+    image: fiware/orion-ld:latest
+    hostname: orion
+    container_name: fiware-orion
+    depends_on:
+      - mongo-db
+    networks:
+      - default
+    ports:
+      # Porta 1026: A porta principal para a API NGSI-v2/LD
+      - "1026:1026"
+    command: -dbhost mongo-db -logLevel DEBUG
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1026/version"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. IOT AGENT FOR MQTT (Gateway entre ESP32 e Orion)
+  iot-agent:
+    image: fiware/iotagent-ul:latest
+    hostname: iot-agent
+    container_name: fiware-iot-agent
+    depends_on:
+      - mongo-db
+      - orion
+      - mosquitto
+    networks:
+      - default
+    ports:
+      # Porta 4041: A porta de administração (provisionamento)
+      - "4041:4041"
+    environment:
+      # Configuração básica
+      - IOTA_LOG_LEVEL=DEBUG
+      - IOTA_CB_HOST=orion
+      - IOTA_CB_PORT=1026
+      # Conexão com o MQTT Broker
+      - IOTA_MQTT_HOST=mosquitto
+      - IOTA_MQTT_PORT=1883
+      # Porta da API do IoT Agent
+      - IOTA_HTTP_PORT=4041
+      # Nome do Serviço Padrão (Usado no Postman: fiware-service: smart)
+      - IOTA_DEFAULT_SERVICE=smart
+      - IOTA_DEFAULT_SERVICE_PATH=/
+      # Chave de Serviço Padrão (Usado no código ESP32: API KEY: TEF)
+      - IOTA_DEFAULT_RESOURCE=/iot/d
+      - IOTA_DEFAULT_ENTITY_TYPE=Thing
+
+  # 3. MOSQUITTO (MQTT Broker)
+  mosquitto:
+    image: eclipse-mosquitto:2.0.15
+    hostname: mosquitto
+    container_name: fiware-mosquitto
+    networks:
+      - default
+    ports:
+      # Porta 1883: A porta que o Wokwi (ESP32) tenta se conectar
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto-data:/mosquitto/data
+
+  # 4. MONGODB (Banco de Dados para Orion e IoT Agent)
+  mongo-db:
+    image: mongo:4.4
+    hostname: mongo-db
+    container_name: fiware-mongo-db
+    networks:
+      - default
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+# Definição de Volumes (Para persistir os dados do BD e MQTT)
+volumes:
+  mongo-data:
+  mosquitto-data:
+
+# Definição de Redes
+networks:
+  default:
+    driver: bridge
