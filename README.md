@@ -21,7 +21,7 @@ O foco principal é garantir a **persistência e consulta do histórico completo
 ---
 ##  Setup da Infraestrutura FIWARE (Ambiente Limpo)
 
-A infraestrutura foi limpa (apagando dados e *Service Paths* antigos) e reconstruída com o *Service Tenant* **`cp5sprint`** para garantir a consistência.
+A infraestrutura foi baseada no seguinte esquema.
 
 | Componente | Função | Configuração de Acesso | Porta |
 | :--- | :--- | :--- | :--- |
