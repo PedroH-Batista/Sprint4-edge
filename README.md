@@ -72,3 +72,5 @@ O projeto pode ser reproduzido com o seguinte fluxo:
 3.  **Código do Dashboard:** O arquivo `useFiwareData.js` no frontend usa a URL de consulta corrigida:
     
     `http://20.150.218.100:8666/v1/contextEntities/type/Atleta/id/Atleta:001/attributes?aggrMethod=raw&lastN=999999`
+
+<img src="img/image3.png" alt=""/>
