@@ -57,7 +57,8 @@ Esta é a prova da quebra do filtro de tempo e a solução para o problema do Da
 | **Histórico Completo (STH)** | A consulta direta ao STH-Comet (Porta **`8666`**) retorna o JSON da série temporal com todos os registros, graças ao parâmetro **`&lastN=999999`** no Query Param. |
 | **** | *Print do JSON de resposta do STH com múltiplas entradas de histórico.* |
 | **Dashboard Final** | O Dashboard carrega os gráficos de *Frequência Cardíaca* e *Velocidade Máxima* com a série temporal completa desde o início da coleta. |
-| **** | *Print do Dashboard exibindo a visualização da série temporal completa.* | <img src="img/image2.png" alt=""/>| 
+| **** | *Print do Dashboard exibindo a visualização da série temporal completa.* | 
+ <img src="img/image2.png" alt=""/>
 ---
 ## 3. Estrutura do Repositório e Reprodução
 
